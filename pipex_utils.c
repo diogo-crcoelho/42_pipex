@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/11/16 22:52:34 by dcarvalh         ###   ########.fr       */
+/*   Created: 2022/11/16 22:26:53 by dcarvalh          #+#    #+#             */
+/*   Updated: 2022/11/16 23:31:36 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "pipex.h"
-
 #include <stdio.h>
-
-int main(int argc, char *argv[], char **envp)
+#include <unistd.h>
+char	**get_path(char **envp, char *str)
 {
-	char *PATH = envp[38];
+	char	**path;
+	int		i;
 	
-	printf("%s\n", PATH);
-
-	get_path(envp, "PATH");
+	while (*envp)
+	{
+		i = -1;
+		while (++i < 4)
+			if ((*envp)[i] != str[i])
+				break;
+		if (i == 4)
+			break;
+		*envp++;
+	}
+	
+	printf("%s", *envp);
 }
