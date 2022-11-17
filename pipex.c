@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/11/16 22:52:34 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/11/17 20:39:37 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,9 @@ int main(int argc, char *argv[], char **envp)
 	
 	printf("%s\n", PATH);
 
-	get_path(envp, "PATH");
+	char  **paths= get_path(envp, "PATH", 5);
+	while (*paths)
+	{
+		printf("%s\n", *paths++);
+	}
 }
