@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/11/18 22:07:43 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/11/19 08:49:55 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ char	*join_cmd(char *path, char *cmd)
 	if (!joined)
 		return (NULL);
 	joined[size + 1] = 0;
-	while (*path)
+	while (*path)	
 		*joined++ = *path++;
 	*joined++ = '/';
 	while (*cmd)
 		*joined++ = *cmd++;
-	return (NULL);
+	return (joined - size);
 }
+
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -71,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 		return (-1);
 	}
 	fd_in = open(argv[1], O_RDONLY);
-	fd_out = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC);
+	fd_out = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (fd_in < 0 || fd_out < 0)
 	{
 		perror("Error opening file");
@@ -79,7 +80,6 @@ int	main(int argc, char **argv, char **envp)
 	}
 	paths = get_path(envp, "PATH", -1, 5);
 	cmds = parse_commands(argc, argv);
-	join_cmd(paths[0], cmds[0]);
 	free(cmds);
 	free_path(paths);
 	return (0);
