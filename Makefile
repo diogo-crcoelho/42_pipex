@@ -6,7 +6,7 @@
 #    By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:44:34 by dcarvalh          #+#    #+#              #
-#    Updated: 2022/11/18 01:37:29 by dcarvalh         ###   ########.fr        #
+#    Updated: 2022/11/18 21:28:53 by dcarvalh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,22 +28,22 @@ C_RED = \033[0;31m
 
 %.o:%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo -e "$(C_GREEN) [OK]   $(C_ORANGE) Compiling:$(C_RESET)" $<
+	@echo "$(C_GREEN) [OK]   $(C_ORANGE) Compiling:$(C_RESET)" $<
 
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME)
-	@echo -e "$(C_GREEN) [OK]   $(C_ORANGE) Compiling:$(C_RESET)" $(NAME)
-	@echo -e "$(C_GREEN)\tCompiled $(NAME)$(C_RESET)"
-
+	@echo "$(C_GREEN) [OK]   $(C_ORANGE) Compiling:$(C_RESET)" $(NAME)
+	@echo "$(C_GREEN)\tCompiled $(NAME)$(C_RESET)"
+	
 all : $(NAME)
 
 clean:
-	@rm -f $(OBJS)
-	@echo -e "$(C_RED)\tRemoved object files$(C_RESET)"
+	@rm -f $(OBJS) *.txt
+	@echo "$(C_RED)\tRemoved object files$(C_RESET)"
 	
 fclean: clean
 	@rm -f $(NAME)
-	@echo -e "$(C_RED)\tRemoved $(NAME)$(C_RESET)"
+	@echo "$(C_RED)\tRemoved $(NAME)$(C_RESET)"
 	
 re: fclean all
 	

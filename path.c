@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:26:53 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/11/18 12:11:42 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:48:33 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ char	**get_path(char **envp, char *str, int i, int j)
 	char	**paths;
 	int		size;
 
-	while (*envp && i < 4)
+	while (*envp && i < 3)
 	{
 		i = -1;
 		while (++i < 4)
 			if ((*envp)[i] != str[i])
 				break ;
-		*envp += (i != 4);
+		envp += (i != 4);
 	}
 	size = count_paths(&(*envp)[j]);
 	paths = (char **)malloc((size + 1) * sizeof(char *));
@@ -75,9 +75,9 @@ void	free_path(char **paths)
 {
 	int	i;
 	
-	i = -1;
-	while (paths[++i])
-		free (paths[i]);
-	free(paths[i]);
-	free(paths);
+	i = 0;
+	while (paths[i]){
+		free (paths[i++]);
+	}
+	free (paths);
 }
