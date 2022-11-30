@@ -6,7 +6,7 @@
 #    By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:44:34 by dcarvalh          #+#    #+#              #
-#    Updated: 2022/11/19 08:48:59 by dcarvalh         ###   ########.fr        #
+#    Updated: 2022/11/30 17:34:15 by dcarvalh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CFLAGS = -Wall -Werror -Wextra
 
 SRCS =  main.c \
 		pipex.c \
-		path.c
+		path.c \
+		cmds.c
 
 OBJS = $(SRCS:.c=.o)
 
