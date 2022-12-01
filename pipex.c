@@ -13,8 +13,7 @@
 #include <unistd.h>
 #include "pipex.h"
 
-
 // void	pipex(char	*paths, char *cmds, int fd_in, int fd_out)
 // {
-		
+
 // }

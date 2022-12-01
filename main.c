@@ -23,6 +23,7 @@ void	free_env(t_envs *env)
 }
 //-1- invalid parameter
 //1- malloc error
+
 void	err_handle(int error, t_envs *env)
 {
 	if (error == -1)
@@ -44,7 +45,7 @@ void	make_env(int argc, char **argv, char **envp, t_envs *env)
 	if (!(env->cmds))
 		err_handle(1, env);
 	env->paths = get_path(envp, "PATH", -1, 5);
-	if (!(env->paths))	
+	if (!(env->paths))
 		err_handle(1, env);
 	env->files[0] = argv[1];
 	env->files[1] = argv[argc - 1];
@@ -54,12 +55,12 @@ void	make_env(int argc, char **argv, char **envp, t_envs *env)
 	env->fds[1] = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (env->fds[1] < 0)
 		err_handle(3, env);
-
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_envs	env;
+
 	(void)envp;
 	if (argc != 5)
 		err_handle(-1, &env);

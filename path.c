@@ -74,9 +74,10 @@ char	**get_path(char **envp, char *str, int i, int j)
 void	free_path(char **paths)
 {
 	int	i;
-	
+
 	i = 0;
-	while (paths[i]){
+	while (paths[i])
+	{
 		free (paths[i++]);
 	}
 	free (paths);
