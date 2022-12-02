@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:08:37 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/02 19:12:52 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:19:28 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ size_t	ft_strlen(char *str)
 
 	i = 0;
 	while (str && str[i])
-		i ++;
+		++i;
 	return (i);
 }

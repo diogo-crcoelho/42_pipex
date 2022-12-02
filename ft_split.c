@@ -6,12 +6,12 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:09:06 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/02 19:15:06 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:20:35 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "pipex.h"
+#include <stdlib.h>
 
 static char	*ft_strchr(const char *str, int c)
 {
@@ -40,11 +40,11 @@ static int	count_words(const char *str, char c)
 	while (str[i])
 	{
 		while (str[i] && str[i] == c)
-			i ++;
+			i++;
 		if (str[i] && str[i] != c)
-			count ++;
+			count++;
 		while (str[i] && str[i] != c)
-			i ++;
+			i++;
 	}
 	return (count);
 }
@@ -55,7 +55,7 @@ static size_t	word_size(const char *str, int n, char c)
 
 	i = 0;
 	while (str[++n] && str[n] != c)
-		i ++;
+		i++;
 	return (i);
 }
 
@@ -98,11 +98,11 @@ char	**ft_split(const char *str, char c)
 	while (++j < size)
 	{
 		while (str[i] && str[i] == c)
-			i ++;
+			i++;
 		if (str[i] && str[i] != c)
 			ret[j] = ft_substr(str, i, word_size(str, i - 1, c));
 		while (str[i] && str[i] != c)
-			i ++;
+			i++;
 	}
 	return (ret);
 }

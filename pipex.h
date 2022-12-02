@@ -6,14 +6,14 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:31:11 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/02 19:13:28 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:19:08 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-#include <stddef.h>
+# include <stddef.h>
 
 typedef struct s_doraemon
 {
