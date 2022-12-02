@@ -6,12 +6,14 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:31:11 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/02 16:49:08 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:13:28 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+#include <stddef.h>
 
 typedef struct s_doraemon
 {
@@ -28,5 +30,6 @@ char		**get_path(char **envp, char *str, int i, int j);
 void		free_path(char **paths);
 char		*join_cmd(char *path, char *cmd);
 char		**parse_commands(t_envs *env);
+size_t		ft_strlen(const char *str);
 
 #endif

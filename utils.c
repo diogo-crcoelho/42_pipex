@@ -6,6 +6,18 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 18:08:37 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/11/18 18:10:26 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:12:52 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stddef.h>
+
+size_t	ft_strlen(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str && str[i])
+		i ++;
+	return (i);
+}
