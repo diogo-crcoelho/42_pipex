@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/11/30 17:41:30 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/02 17:12:54 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,21 @@ void	err_handle(int error, t_envs *env)
 	exit(-1);
 }
 
-void	make_env(int argc, char **argv, char **envp, t_envs *env)
+void	make_env(char **envp, t_envs *env)
 {
 	(void) envp;
-	env->cmds = parse_commands(argc, argv);
+	env->cmds = parse_commands(env);
 	if (!(env->cmds))
 		err_handle(1, env);
 	env->paths = get_path(envp, "PATH", -1, 5);
 	if (!(env->paths))
 		err_handle(1, env);
-	env->files[0] = argv[1];
-	env->files[1] = argv[argc - 1];
-	env->fds[0] = open(argv[1], O_RDONLY);
+	env->files[0] = env->argv[1];
+	env->files[1] = env->argv[env->argc - 1];
+	env->fds[0] = open(env->files[0], O_RDONLY);
 	if (env->fds[0] < 0)
 		err_handle(2, env);
-	env->fds[1] = open(argv[argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0666);
+	env->fds[1] = open(env->files[1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (env->fds[1] < 0)
 		err_handle(3, env);
 }
@@ -64,9 +64,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)envp;
 	if (argc != 5)
 		err_handle(-1, &env);
-	make_env(argc, argv, envp, &env);
-	printf("%s\n", env.paths[0]);
-	printf("%s\n", env.cmds[0]);
-	free_env(&env);
+	env.argc = argc;
+	env.argv = argv;
+	// make_env(envp, &env);
+	env.cmds = parse_commands(&env);
+	while (*env.cmds)
+		printf("cmd-%s-flags-%s\n",*env.cmds++, *env.flags++);
+	// free_env(&env);
 	return (0);
 }
