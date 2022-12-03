@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/02 17:12:54 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/03 20:08:24 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	make_env(char **envp, t_envs *env)
 	env->cmds = parse_commands(env);
 	if (!(env->cmds))
 		err_handle(1, env);
-	env->paths = get_path(envp, "PATH", -1, 5);
+	env->paths = get_path(envp, "PATH");
 	if (!(env->paths))
 		err_handle(1, env);
 	env->files[0] = env->argv[1];
@@ -66,10 +66,15 @@ int	main(int argc, char **argv, char **envp)
 		err_handle(-1, &env);
 	env.argc = argc;
 	env.argv = argv;
-	// make_env(envp, &env);
-	env.cmds = parse_commands(&env);
-	while (*env.cmds)
-		printf("cmd-%s-flags-%s\n",*env.cmds++, *env.flags++);
+	make_env(envp, &env);
+	// env.cmds = parse_commands(&env);
+	// while (*env.cmds)
+	// 	printf("cmd-%s-flags-%s\n",*env.cmds++, *env.flags++);
 	// free_env(&env);
+	while (*env.paths)
+	{
+		printf("%s\n", *env.paths++);
+	}
+	
 	return (0);
 }
