@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/03 20:08:24 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:42:56 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	free_env(t_envs *env)
 {
-	free(env->cmds);
+	free_path(env->cmds);
 	free_path(env->paths);
 }
 //-1- invalid parameter
@@ -66,15 +66,16 @@ int	main(int argc, char **argv, char **envp)
 		err_handle(-1, &env);
 	env.argc = argc;
 	env.argv = argv;
-	// make_env(envp, &env);
-	env.cmds = parse_commands(&env);
-	int i =-1;
-	while(env.cmds[++i]){
-		printf("cmd:%s-flags:", env.cmds[i]);
-		while(*env.flags[i])
-			// printf("cmd:%s-flags:%s\n", env.cmds[i], env.flags[0][0]);
-			printf("%s...", *env.flags[i]++);
-		printf("\n");
-	}			
+	make_env(envp, &env);
+	// env.cmds = parse_commands(&env);
+	// int i =-1;
+	// while(env.cmds[++i]){
+	// 	printf("cmd:%s-flags:", env.cmds[i]);
+	// 	while(*env.flags[i])
+	// 		// printf("cmd:%s-flags:%s\n", env.cmds[i], env.flags[0][0]);
+	// 		printf("%s...", *env.flags[i]++);
+	// 	printf("\n");
+	// }
+	free_env(&env);			
 	return (0);
 }

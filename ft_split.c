@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:09:06 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/03 19:51:37 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:41:05 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static char	*ft_word(char *str, int sep)
 	char	*word;
 
 	i = 0;
-	while (str[i] != sep)
+	while (str[i] && str[i] != sep)
 		++i;
 	word = malloc(i + 1);
 	if (!word)
