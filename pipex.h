@@ -21,16 +21,16 @@ typedef struct s_doraemon
 	char	**argv;
 	char	**paths;
 	char	**cmds;
-	char	**flags;
+	char	***flags;
 	int		fds[2];
 	char	*files[2];
 }			t_envs;
 
-char		**get_path(char **envp, char *str);
-void		free_path(char **paths);
-char		*join_cmd(char *path, char *cmd);
-char		**parse_commands(t_envs *env);
-size_t		ft_strlen(const char *str);
+char	**get_path(char **envp, char *str);
+void	free_path(char **paths);
+char	*join_cmd(char *path, char *cmd);
+char	**parse_commands(t_envs *env);
+size_t	ft_strlen(const char *str);
 char	**ft_split(char *str, int sep);
 
 #endif

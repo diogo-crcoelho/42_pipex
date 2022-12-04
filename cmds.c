@@ -13,33 +13,16 @@
 #include "pipex.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 static char	*sep_cmds(t_envs *env, int idx)
 {
-	int		size1;
-	int		size2;
-	int		i;
-	char	*cmds;
-
-	i = 0;
-	size1 = 0;
-	while (env->argv[idx][i] && env->argv[idx][i++] != ' ')
-		++size1;
-	cmds = malloc(size1 + 1);
-	cmds[size1] = 0;
-	size2 = 0;
-	while (env->argv[idx][++i])
-		++size2;
-	env->flags[idx - 2] = malloc(size2);
-	env->flags[idx - 2][size2] = 0;
-	if (!(cmds && env->flags))
-		return (NULL);
-	while (*env->argv[idx] && *env->argv[idx] != ' ')
-		*cmds++ = *env->argv[idx]++;
-	while (*env->argv[idx])
-		*env->flags[idx - 2]++ = *env->argv[idx]++;
-	env->flags[idx - 2] -= (size2 + 1);
-	return (cmds - size1);
+	char	*cmd;
+	char **flags;
+	flags = ft_split(env->argv[idx], ' ');
+	cmd = flags[0];
+	env->flags[idx - 2] = &flags[1];
+	return(cmd);
 }
 
 char	**parse_commands(t_envs *env)
@@ -50,8 +33,8 @@ char	**parse_commands(t_envs *env)
 
 	size = env->argc - 3;
 	cmds = (char **)malloc((size + 1) * sizeof(char *));
-	env->flags = (char **)malloc((size + 1) * sizeof(char *));
-	if (!cmds || !(env->flags))
+	env->flags = (char ***)malloc((size + 1) * sizeof(char **));
+	if (!cmds)
 		return (NULL);
 	cmds[size] = NULL;
 	i = 1;
@@ -84,4 +67,3 @@ char	*join_cmd(char *path, char *cmd)
 		*joined++ = *cmd++;
 	return (joined - (size + 1));
 }
-

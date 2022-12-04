@@ -66,15 +66,15 @@ int	main(int argc, char **argv, char **envp)
 		err_handle(-1, &env);
 	env.argc = argc;
 	env.argv = argv;
-	make_env(envp, &env);
-	// env.cmds = parse_commands(&env);
-	// while (*env.cmds)
-	// 	printf("cmd-%s-flags-%s\n",*env.cmds++, *env.flags++);
-	// free_env(&env);
-	while (*env.paths)
-	{
-		printf("%s\n", *env.paths++);
-	}
-	
+	// make_env(envp, &env);
+	env.cmds = parse_commands(&env);
+	int i =-1;
+	while(env.cmds[++i]){
+		printf("cmd:%s-flags:", env.cmds[i]);
+		while(*env.flags[i])
+			// printf("cmd:%s-flags:%s\n", env.cmds[i], env.flags[0][0]);
+			printf("%s...", *env.flags[i]++);
+		printf("\n");
+	}			
 	return (0);
 }
