@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/04 18:47:18 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:31:11 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void	free_env(t_envs *env)
 	free_pp(env->paths);
 	free_pp(env->cmds);
 	// if (*env->flags)
-		// free_ppp(env->flags);
+		free_ppp(env->flags);
 
 }
+
 //-1- invalid parameter
 //1- malloc error
 

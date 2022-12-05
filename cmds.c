@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:34:46 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/04 14:40:01 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:35:26 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ char	**parse_commands(t_envs *env)
 	size = env->argc - 3;
 	cmds = (char **)malloc((size + 1) * sizeof(char *));
 	env->flags = (char ***)malloc((size + 1) * sizeof(char **));
-	if (!cmds)
+	if (!cmds || !env->flags)
 		return (NULL);
+	env->flags[size] = NULL;
 	cmds[size] = NULL;
 	i = 1;
 	while (i++ <= size)
