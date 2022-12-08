@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/08 19:03:21 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:28:36 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	main(int argc, char **argv, char **envp)
 	// 	printf("cmd:%s-flags:", env.cmds[i]);
 	// 	printf("\n");
 	// }
-	free_env(&env);
+	find_path(&env, 2);
+	// free_env(&env);
 	return (0);
 }

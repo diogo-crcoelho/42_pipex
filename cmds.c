@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:34:46 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/08 18:31:44 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/08 19:52:07 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ char	**parse_commands(t_envs *env)
 	i = 1;
 	while (i++ <= size)
 	{
-		char **temp = ft_split(env->argv[i], ' ');
-		cmds[i - 2] = temp[0];
-		free_pp(temp, 1);
+		// char **temp = ft_split(env->argv[i], ' ');
+		cmds[i - 2] = env->argv[i];
+		// free_pp(temp, 1);
 	}
 	return (cmds);
 }
