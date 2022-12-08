@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/08 20:53:31 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:55:04 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	free_env(t_envs *env)
 	// if (*env->paths)
 		free_pp(env->paths, 0);
 	// if (env->cmds)
-	// free_pp(env->cmds, 0);
+	free_pp(env->cmds, 0);
 	// if (*env->flags)
 		// free_ppp(env->flags);
 
