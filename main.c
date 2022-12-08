@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/08 20:28:36 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:53:31 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 void	free_env(t_envs *env)
 {
-	if (*env->paths)
+	// if (*env->paths)
 		free_pp(env->paths, 0);
-	if (*env->cmds)
-		free_pp(env->cmds, 0);
+	// if (env->cmds)
+	// free_pp(env->cmds, 0);
 	// if (*env->flags)
 		// free_ppp(env->flags);
 
@@ -47,11 +47,11 @@ void	err_handle(int error, t_envs *env)
 
 void	make_env(char **envp, t_envs *env)
 {
-	(void) envp;
+
 	env->cmds = parse_commands(env);
 	if (!(env->cmds))
 		err_handle(1, env);
-	env->paths = get_path(envp, "PATH");
+	get_path(env,envp, "PATH");
 	if (!(env->paths))
 		err_handle(1, env);
 	env->files[0] = env->argv[1];
@@ -74,14 +74,20 @@ int	main(int argc, char **argv, char **envp)
 		err_handle(-1, &env);
 	env.argc = argc;
 	env.argv = argv;
-	make_env(envp, &env);
+	// make_env(envp, &env);
+	get_path(&env,envp, "PATH");
 	// env.cmds = parse_commands(&env);
 	// int i =-1;
 	// while(env.cmds[++i]){
 	// 	printf("cmd:%s-flags:", env.cmds[i]);
 	// 	printf("\n");
 	// }
-	find_path(&env, 2);
-	// free_env(&env);
+	char *tt =find_path(&env, 2);
+	char *ttt =find_path(&env, 3);
+	
+	free (tt);
+	free (ttt);
+	
+	free_env(&env);
 	return (0);
 }

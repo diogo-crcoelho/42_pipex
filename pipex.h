@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:31:11 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/08 20:18:34 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/08 20:38:20 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_doraemon
 	char	*files[2];
 }			t_envs;
 
-char	**get_path(char **envp, char *str);
+void get_path(t_envs *env,char **envp, char *str);
 
 void free_pp(char **pp, int i);
 
