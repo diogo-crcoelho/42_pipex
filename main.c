@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/15 20:29:19 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:48:39 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	free_env(t_envs *env)
 		free_pp(env->paths, 0);
 	if (*env->cmds)
 		free_pp(env->cmds, -1);
-	// if (*env->flags)
-	// free_ppp(env->flags);
 }
 
 //-1- invalid parameter
@@ -67,7 +65,6 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_envs	env;
 
-
 	if (argc != 5)
 		err_handle(-1, &env);
 	env.argc = argc;
@@ -75,7 +72,6 @@ int	main(int argc, char **argv, char **envp)
 	make_env(envp, &env);
 	execute_cmd(&env, 2);
 	execute_cmd(&env, 3);
-
 	free_env(&env);
 	return (0);
 }

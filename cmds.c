@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:34:46 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/08 19:52:07 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:46:36 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
 
 char	**parse_commands(t_envs *env)
 {
@@ -30,9 +29,7 @@ char	**parse_commands(t_envs *env)
 	i = 1;
 	while (i++ <= size)
 	{
-		// char **temp = ft_split(env->argv[i], ' ');
 		cmds[i - 2] = env->argv[i];
-		// free_pp(temp, 1);
 	}
 	return (cmds);
 }

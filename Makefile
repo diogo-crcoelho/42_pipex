@@ -6,7 +6,7 @@
 #    By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:44:34 by dcarvalh          #+#    #+#              #
-#    Updated: 2022/12/15 20:13:40 by dcarvalh         ###   ########.fr        #
+#    Updated: 2022/12/16 19:47:55 by dcarvalh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,3 +55,5 @@ re: fclean all
 sanitize: $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) -fsanitize=address -g
 
+norm:
+	norminette $(SRCS) 
