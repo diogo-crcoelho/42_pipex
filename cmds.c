@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:34:46 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/16 19:46:36 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/18 16:37:12 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,29 @@ char	*join_cmd(char *path, char *cmd)
 	while (*cmd && *cmd != ' ')
 		*joined++ = *cmd++;
 	return (joined - (size + 1));
+}
+
+char	*find_path(t_envs *env, int idx)
+{
+	char	**temp;
+	char	*teste;
+	int		i;
+	int		x;
+
+	temp = ft_split(env->argv[idx], ' ');
+	i = 0;
+	while (env->paths[i])
+	{
+		teste = join_cmd(env->paths[i++], temp[0]);
+		x = access(teste, F_OK);
+		if (x == 0)
+		{
+			printf("%s\n", teste);
+			free_pp(temp, 0);
+			return (teste);
+		}
+		free(teste);
+	}
+	free_pp(temp, 0);
+	return (NULL);
 }

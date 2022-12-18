@@ -6,7 +6,7 @@
 #    By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:44:34 by dcarvalh          #+#    #+#              #
-#    Updated: 2022/12/16 19:47:55 by dcarvalh         ###   ########.fr        #
+#    Updated: 2022/12/18 17:02:58 by dcarvalh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,4 +56,5 @@ sanitize: $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) -fsanitize=address -g
 
 norm:
-	norminette $(SRCS) 
+	@norminette $(SRCS) | cat > teste2.txt;
+	@norminette pipex.h | cat >> teste2.txt;
