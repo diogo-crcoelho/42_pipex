@@ -6,7 +6,7 @@
 #    By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:44:34 by dcarvalh          #+#    #+#              #
-#    Updated: 2022/12/18 17:02:58 by dcarvalh         ###   ########.fr        #
+#    Updated: 2022/12/19 20:42:17 by dcarvalh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ C_GREEN = \033[1;92m
 C_RESET = \033[0m
 C_PURPLE = \033[0;35m
 C_RED = \033[0;31m
+BG_YELLOW = \x1b[43m
 
 echo = /bin/echo -e
 %.o:%.c
@@ -55,6 +56,15 @@ re: fclean all
 sanitize: $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) -fsanitize=address -g
 
+norminette:
+	
+
 norm:
-	@norminette $(SRCS) | cat > teste2.txt;
-	@norminette pipex.h | cat >> teste2.txt;
+	@$(shell (norminette $(SRCS) $(NAME).h > norm.txt))
+	@if [ $(shell (< norm.txt wc -l)) -eq $(shell (< norm.txt grep "OK" | wc -l)) ] ;then \
+		$(echo) "$(C_PURPLE)[NORMINETTE]: $(C_GREEN) [OK]$(C_RESET)" ; \
+	else \
+		$(echo) "$(C_PURPLE)[NORMINETTE]: $(C_RED) [KO]$(C_RESET)"; \
+		< norm.txt cat | grep -v "OK" | grep --color=always -e "^" -e "Error:"; \
+	fi ;
+	@rm -f norm.txt
