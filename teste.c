@@ -23,19 +23,19 @@ int	main(int argc, char **argv)
 		execve("/bin/cat", temp, NULL);
 	}
 
-	int pid2 = fork();
-	if (pid2 == 0)
-	{
+	//int pid2 = fork();
+	//if (pid2 == 0)
+	//{
 		dup2(fds[0],0);
 		close(fds[0]);
 		close(fds[1]);
-		dup2(fd2, 1);
+		//dup2(fd2, 1);
 		char *temp[] = {"wc", "-l", NULL};
 		execve("/usr/bin/wc", temp, NULL);
-	}
+	//}
 	close(fds[0]);
 	close(fds[1]);
-	waitpid(-1, NULL, 0);
+	waitpid(0, NULL, 0);
 	//waitpid(pid2, NULL, 0);
 }
 //argca

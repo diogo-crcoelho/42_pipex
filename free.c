@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <unistd.h>
 
 void	free_pp(char **pp, int i)
 {

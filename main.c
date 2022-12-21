@@ -53,10 +53,10 @@ void	make_env(char **envp, t_envs *env)
 		err_handle(1, env);
 	env->files[0] = env->argv[1];
 	env->files[1] = env->argv[env->argc - 1];
-	env->fds[0] = open(env->files[0], O_RDONLY);
-	if (env->fds[0] < 0)
+	env->fdfs[0] = open(env->files[0], O_RDONLY);
+	if (env->fdfs[0] < 0)
 		err_handle(2, env);
-	env->fds[1] = open(env->files[1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	env->fdfs[1] = open(env->files[1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (env->fds[1] < 0)
 		err_handle(3, env);
 }
@@ -70,8 +70,7 @@ int	main(int argc, char **argv, char **envp)
 	env.argc = argc;
 	env.argv = argv;
 	make_env(envp, &env);
-	execute_cmd(&env, 2);
-	execute_cmd(&env, 3);
+	pipex(&env);
 	free_env(&env);
 	return (0);
 }

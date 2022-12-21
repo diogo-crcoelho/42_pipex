@@ -74,7 +74,6 @@ char	*find_path(t_envs *env, int idx)
 		x = access(teste, F_OK);
 		if (x == 0)
 		{
-			printf("%s\n", teste);
 			free_pp(temp, 0);
 			return (teste);
 		}

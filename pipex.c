@@ -25,9 +25,25 @@ void	execute_cmd(t_envs *env, int idx)
 	execve(path, flagged, NULL);
 }
 
-void	pipex(t_envs *env)
+int	pipex(t_envs *env)
 {
-	(void)env;
+	if (pipe(env->fds) < 0)
+		return (-1);
+	int pi = fork();
+	if (pi == 0)
+	{
+		dup2(env->fds[1], 1);
+		close_pipes(env->fds);
+		dup2(env->fdfs[0], 0);
+		execute_cmd(env, 2);
+	}
+	dup2(env->fds[0], 0);
+	close_pipes(env->fds);
+	dup2(env->fdfs[1], 1);
+	execute_cmd(env, 3);
+	close_pipes(env->fds);
+	waitpid(-1, NULL, 0);
+	return (0);
 }
 
 //Estudar forks e pipes
