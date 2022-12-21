@@ -21,7 +21,7 @@ void	free_pp(char **pp, int i)
 	free(pp);
 }
 
-void close_pipes(int fds[2])
+void	close_pipes(int fds[2])
 {
 	close(fds[0]);
 	close(fds[1]);

@@ -22,8 +22,9 @@ typedef struct s_doraemon
 	char	**paths;
 	char	**cmds;
 	int		fds[2];
-	int		fdfs[2];
-	char	*files[2];
+	int		files[2];
+	char	*infile;
+	char	*outfile;
 }			t_envs;
 
 void		get_path(t_envs *env, char **envp, char *str);
@@ -33,10 +34,8 @@ char		*join_cmd(char *path, char *cmd);
 char		**parse_commands(t_envs *env);
 // size_t	ft_strlen(const char *str);
 char		**ft_split(char *str, int sep);
-void		execute_cmd(t_envs *env, int idx);
-void close_pipes(int fds[2]);
-int	pipex(t_envs *env);
-
-
+// void		execute_cmd(t_envs *env, int idx);
+void		close_pipes(int fds[2]);
+int			pipex(t_envs *env);
 
 #endif

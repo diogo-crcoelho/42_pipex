@@ -64,15 +64,13 @@ char	*find_path(t_envs *env, int idx)
 	char	**temp;
 	char	*teste;
 	int		i;
-	int		x;
 
-	temp = ft_split(env->argv[idx], ' ');
 	i = 0;
+	temp = ft_split(env->argv[idx], ' ');
 	while (env->paths[i])
 	{
 		teste = join_cmd(env->paths[i++], temp[0]);
-		x = access(teste, F_OK);
-		if (x == 0)
+		if (access(teste, F_OK) == 0)
 		{
 			free_pp(temp, 0);
 			return (teste);
