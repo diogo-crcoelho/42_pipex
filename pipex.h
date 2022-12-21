@@ -33,5 +33,6 @@ char		**parse_commands(t_envs *env);
 // size_t	ft_strlen(const char *str);
 char		**ft_split(char *str, int sep);
 void		execute_cmd(t_envs *env, int idx);
+void close_pipes(int fds[2]);
 
 #endif

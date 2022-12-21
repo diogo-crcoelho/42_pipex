@@ -44,11 +44,11 @@ $(NAME): $(OBJS)
 all : $(NAME)
 
 clean:
-	@rm -f $(OBJS) *.txt
+	@rm -f $(OBJS) 
 	@$(echo) "$(C_RED)\tRemoved object files$(C_RESET)"
 	
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) *.txt
 	@$(echo) "$(C_RED)\tRemoved $(NAME)$(C_RESET)"
 	
 re: fclean all
