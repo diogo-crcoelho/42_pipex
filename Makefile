@@ -6,7 +6,7 @@
 #    By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:44:34 by dcarvalh          #+#    #+#              #
-#    Updated: 2022/12/19 20:42:17 by dcarvalh         ###   ########.fr        #
+#    Updated: 2022/12/22 16:38:32 by dcarvalh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ SRCS =  main.c \
 		path.c \
 		cmds.c \
 		ft_split.c \
-		utils.c \
 		free.c
 
 OBJS = $(SRCS:.c=.o)

@@ -6,12 +6,11 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:09:06 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/16 19:46:41 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:40:49 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 static int	word_count(char *str, int sep)

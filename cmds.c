@@ -6,14 +6,12 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:34:46 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/18 16:37:12 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:43:33 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 char	**parse_commands(t_envs *env)
 {
@@ -57,26 +55,4 @@ char	*join_cmd(char *path, char *cmd)
 	while (*cmd && *cmd != ' ')
 		*joined++ = *cmd++;
 	return (joined - (size + 1));
-}
-
-char	*find_path(t_envs *env, int idx)
-{
-	char	**temp;
-	char	*teste;
-	int		i;
-
-	i = 0;
-	temp = ft_split(env->argv[idx], ' ');
-	while (env->paths[i])
-	{
-		teste = join_cmd(env->paths[i++], temp[0]);
-		if (access(teste, F_OK) == 0)
-		{
-			free_pp(temp, 0);
-			return (teste);
-		}
-		free(teste);
-	}
-	free_pp(temp, 0);
-	return (NULL);
 }
