@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/22 16:41:28 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/22 19:01:57 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	err_handle(int error, t_envs *env)
 	}
 	else if (error == 3)
 		perror(env->outfile);
+	else if (error == 4)
 	if (error != -1)
 		free_env(env);
 	exit(1);
@@ -70,6 +71,6 @@ int	main(int argc, char **argv, char **envp)
 	env.argc = argc;
 	env.argv = argv;
 	make_env(envp, &env);
-	pipex(&env);
+	pipex(&env, envp);
 	return (0);
 }

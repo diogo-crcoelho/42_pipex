@@ -6,7 +6,7 @@
 #    By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:44:34 by dcarvalh          #+#    #+#              #
-#    Updated: 2022/12/22 16:38:32 by dcarvalh         ###   ########.fr        #
+#    Updated: 2022/12/22 18:53:11 by dcarvalh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,10 @@ SRCS =  main.c \
 		ft_split.c \
 		free.c
 
+B_SRCS = teste.c
+
 OBJS = $(SRCS:.c=.o)
+B_OBJS = $(B_SRCS:.c=.o)
 
 C_RED = \033[0;31m
 C_GREEN = \033[1;92m
@@ -56,12 +59,23 @@ sanitize: $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) -fsanitize=address -g
 
 
-norm:
+norm_M:
+	@$(echo) "$(C_RED)$(BG_YELLOW)[Norminette]$(C_RESET)"
 	@$(shell (norminette $(SRCS) $(NAME).h > norm.txt))
 	@if [ $(shell (< norm.txt wc -l)) -eq $(shell (< norm.txt grep "OK" | wc -l)) ] ;then \
-		$(echo) "$(C_PURPLE)[NORMINETTE]: $(C_GREEN) [OK]$(C_RESET)" ; \
+		$(echo) "$(C_PURPLE)[Mandatory]: $(C_GREEN) [OK]$(C_RESET)" ; \
 	else \
-		$(echo) "$(C_PURPLE)[NORMINETTE]: $(C_RED) [KO]$(C_RESET)"; \
+		$(echo) "$(C_PURPLE)[Mandatory]: $(C_RED) [KO]$(C_RESET)"; \
+		< norm.txt cat | grep -v "OK" | grep --color=always -e "^" -e "Error:"; \
+	fi ;
+	@rm -f norm.txt
+
+norm : norm_M
+	@$(shell (norminette $(B_SRCS) $(NAME).h > norm.txt))
+	@if [ $(shell (< norm.txt wc -l)) -eq $(shell (< norm.txt grep "OK" | wc -l)) ] ;then \
+		$(echo) "$(C_PURPLE)[BONUS]: $(C_GREEN) [OK]$(C_RESET)" ; \
+	else \
+		$(echo) "$(C_PURPLE)[BONUS]: $(C_RED) [KO]$(C_RESET)"; \
 		< norm.txt cat | grep -v "OK" | grep --color=always -e "^" -e "Error:"; \
 	fi ;
 	@rm -f norm.txt
