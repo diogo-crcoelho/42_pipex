@@ -56,8 +56,6 @@ re: fclean all
 sanitize: $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) -fsanitize=address -g
 
-norminette:
-	
 
 norm:
 	@$(shell (norminette $(SRCS) $(NAME).h > norm.txt))
