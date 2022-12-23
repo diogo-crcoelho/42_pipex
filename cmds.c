@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:34:46 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/23 18:01:16 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:45:59 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ t_cmd	**parse_cmds(t_cmd **head, char **argv, char **envp)
 			end->next = tmp;
 		end = tmp;
 	}
-	return head;
+	return (head);
 }

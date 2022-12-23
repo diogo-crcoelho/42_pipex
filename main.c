@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 20:45:39 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/23 17:39:56 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:45:37 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-static void	make_env(int argc, char **argv,t_envs *env)
+static void	make_env(int argc, char **argv, t_envs *env)
 {
 	env->infile = argv[1];
 	env->outfile = argv[argc - 1];
@@ -39,7 +39,6 @@ int	main(int argc, char **argv, char **envp)
 	make_env(argc, argv, &env);
 	env.cmds = parse_cmds(&cmds, argv, envp);
 	pipex(&env);
-	// free_env(&env);
 	free_cmds(*env.cmds);
 	return (0);
 }
