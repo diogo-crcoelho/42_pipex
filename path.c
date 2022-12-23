@@ -6,14 +6,14 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:26:53 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/22 16:43:19 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/23 13:52:24 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 #include <stdlib.h>
 
-void	get_path(t_envs *env, char **envp, char *str)
+char	*get_path(char **envp, char *str)
 {
 	int	i;
 
@@ -26,5 +26,5 @@ void	get_path(t_envs *env, char **envp, char *str)
 				break ;
 		envp += (i != 4);
 	}
-	env->paths = ft_split(&(*envp)[5], ':');
+	return (&(*envp)[5]);
 }
