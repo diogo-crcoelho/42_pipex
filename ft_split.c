@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
 #include <stdlib.h>
 
 static int	word_count(char *str, int sep)

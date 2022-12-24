@@ -12,9 +12,6 @@
 
 #include "pipex.h"
 #include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 static void	make_env(int argc, char **argv, t_envs *env)
 {

@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-#include <stdlib.h>
-
 char	*get_path(char **envp, char *str)
 {
 	int	i;
