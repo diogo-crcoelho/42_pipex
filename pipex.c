@@ -16,9 +16,9 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-static void	execute_cmd(t_cmd *cmd, char **envp, int next)
+static void	execute_cmd(t_cmd *cmd, char **envp)
 {
-	dup2(next, 0);
+	dup2(cmd->fdopen, 0);
 	if (cmd->next)
 		dup2(cmd->fd[1], 1);
 	close_pipes(cmd->fd);
@@ -30,21 +30,21 @@ static void	execute_cmd(t_cmd *cmd, char **envp, int next)
 void	pipex(t_envs *env)
 {
 	t_cmd	*cmds;
-	int		file;
 
 	cmds = *env->cmds;
-	file = env->files[0];
+	cmds->fdopen = env->files[0];
 	while (cmds)
 	{
 		if (pipe(cmds->fd) < 0)
 			return ;
 		dup2(env->files[1], 1);
 		if (fork() == 0)
-			execute_cmd(cmds, env->envp, file);
+			execute_cmd(cmds, env->envp);
 		else
 		{
 			waitpid(-1, NULL, 0);
-			file = dup(cmds->fd[0]);
+			if (cmds->next)
+				cmds->next->fdopen = dup(cmds->fd[0]);
 			close_pipes(cmds->fd);
 			cmds = cmds->next;
 		}

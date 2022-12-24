@@ -21,6 +21,7 @@ typedef struct s_cmd
 	char			**args;
 	int				fd[2];
 	int				status;
+	int				fdopen;
 	struct s_cmd	*next;
 }					t_cmd;
 
