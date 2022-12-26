@@ -6,14 +6,15 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/23 19:45:04 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/26 16:18:53 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <fcntl.h>
 
 static void	execute_cmd(t_cmd *cmd, char **envp)
 {
@@ -26,7 +27,7 @@ static void	execute_cmd(t_cmd *cmd, char **envp)
 	exit(1);
 }
 
-void	pipex(t_envs *env)
+static void	pipex(t_envs *env)
 {
 	t_cmd	*cmds;
 
@@ -48,4 +49,32 @@ void	pipex(t_envs *env)
 			cmds = cmds->next;
 		}
 	}
+}
+
+static void	make_env(int argc, char **argv, t_envs *env)
+{
+	env->infile = argv[1];
+	env->outfile = argv[argc - 1];
+	env->files[0] = open(env->infile, O_RDONLY);
+	if (env->files[0] < 0)
+	{
+		env->files[0] = 1;
+		err_handle(env->infile, 0);
+	}
+	env->files[1] = open(env->outfile, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (env->files[1] < 0)
+		err_handle(env->outfile, 1);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	static t_envs	env;
+	static t_cmd	*cmds;
+
+	env.envp = envp;
+	make_env(argc, argv, &env);
+	env.cmds = parse_cmds(&cmds, argv, envp);
+	pipex(&env);
+	free_cmds(*env.cmds);
+	return (0);
 }
