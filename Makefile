@@ -10,18 +10,25 @@
 #                                                                              #
 # **************************************************************************** #
 
+
 NAME = pipex
+B_NAME = pipex_bonus
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS =  main.c \
+SRCS =	main.c \
 		pipex.c \
 		path.c \
 		cmds.c \
 		ft_split.c \
 		free.c
 
-B_SRCS = teste.c
+B_SRCS =	main_bonus.c \
+			pipex.c \
+		 	path.c \
+		 	cmds.c \
+		 	ft_split.c \
+			free.c
 
 OBJS = $(SRCS:.c=.o)
 B_OBJS = $(B_SRCS:.c=.o)
@@ -33,9 +40,13 @@ C_PURPLE = \033[0;35m
 C_RED = \033[0;31m
 BG_YELLOW = \x1b[43m
 
+SRCS := $(addprefix srcs/, $(SRCS))
+B_SRCS := $(addprefix srcs/bonus/, $(B_SRCS))
+
 echo = /bin/echo -e
+
 %.o:%.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ -Iincs
 	@$(echo) "$(C_GREEN) [OK]   $(C_PURPLE) Compiling:$(C_RESET)" $<
 
 $(NAME): $(OBJS)
@@ -45,8 +56,13 @@ $(NAME): $(OBJS)
 	
 all : $(NAME)
 
+bonus : $(B_OBJS)
+	@$(CC) $(B_OBJS) -o pipex
+	@$(echo) "$(C_GREEN) [OK]   $(C_PURPLE) Compiling:$(C_RESET)" $(NAME)
+	@$(echo) "$(C_GREEN)\tCompiled $(NAME)$(C_RESET)"
+
 clean:
-	@rm -f $(OBJS) 
+	@rm -f $(OBJS) $(B_OBJS)
 	@$(echo) "$(C_RED)\tRemoved object files$(C_RESET)"
 	
 fclean: clean
@@ -61,7 +77,7 @@ sanitize: $(OBJS)
 
 norm_M:
 	@$(echo) "$(C_RED)$(BG_YELLOW)[Norminette]$(C_RESET)"
-	@$(shell (norminette $(SRCS) $(NAME).h > norm.txt))
+	@$(shell (norminette $(SRCS) incs/$(NAME).h > norm.txt))
 	@if [ $(shell (< norm.txt wc -l)) -eq $(shell (< norm.txt grep "OK" | wc -l)) ] ;then \
 		$(echo) "$(C_PURPLE)[Mandatory]: $(C_GREEN) [OK]$(C_RESET)" ; \
 	else \

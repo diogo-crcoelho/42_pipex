@@ -7,9 +7,11 @@
 #include <sys/wait.h>
 int	main(int argc, char **argv)
 {
+	(void)argc;
 	int fds[2];
 	int fd1 = open(argv[1], O_RDONLY);
 	int fd2 = open(argv[2], O_RDWR | O_TRUNC, 0644);
+
 	if (pipe(fds) == -1)
 		exit(1);
 	int pid = fork();
@@ -29,7 +31,7 @@ int	main(int argc, char **argv)
 		close(fds[1]);
 		dup2(fds[0],0);
 		close(fds[0]);
-		//dup2(fd2, 1);
+		dup2(fd2, 1);
 		char *temp[] = {"wc", "-l", (void *)0};
 		execve("/usr/bin/wc", temp, (void *)0);
 	//}
