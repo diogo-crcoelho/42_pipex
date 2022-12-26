@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:31:11 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/26 16:16:24 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/26 19:07:21 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,15 @@ typedef struct s_doraemon
 	char			**envp;
 }					t_envs;
 
-char				*get_path(char **env, char *str);
-char				**ft_split(char *str, int sep);
-void				close_pipes(int fds[2]);
-void				err_handle(char *str, int code);
-void				free_cmds(t_cmd *head);
-void				free_pp(char **pp, int i);
-t_cmd				**parse_cmds(t_cmd **head, char **argv, char **envp);
+char	*get_path(char **env, char *str);
+char	**ft_split(char *str, int sep);
+void	close_pipes(int fds[2]);
+void	err_handle(char *str, int code);
+void	free_cmds(t_cmd *head);
+void	free_pp(char **pp, int i);
+t_cmd	**parse_cmds(t_cmd **head, char **argv, char **envp, int idx);
+char	*get_next_line(int fd);
+int		ft_strcmp(char *s1, char *s2);
+void	make_here_env(int argc, char **argv, t_envs *env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/26 16:18:53 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/26 19:05:48 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,15 @@ static void	execute_cmd(t_cmd *cmd, char **envp)
 	exit(1);
 }
 
-static void	pipex(t_envs *env)
+static void	pipex(t_envs *env, int flag)
 {
 	t_cmd	*cmds;
 
 	cmds = *env->cmds;
 	cmds->fdopen = env->files[0];
+	if (flag)
+		cmds->fdopen = dup(cmds->fd[0]);
+	close_pipes(cmds->fd);
 	while (cmds)
 	{
 		if (pipe(cmds->fd) < 0)
@@ -70,11 +73,18 @@ int	main(int argc, char **argv, char **envp)
 {
 	static t_envs	env;
 	static t_cmd	*cmds;
+	int				here;
 
+	(void)argc;
+	(void)envp;
+	here = !(ft_strcmp(argv[1], "here_doc"));
 	env.envp = envp;
-	make_env(argc, argv, &env);
-	env.cmds = parse_cmds(&cmds, argv, envp);
-	pipex(&env);
+	env.cmds = parse_cmds(&cmds, argv, envp, 2 + here);
+	if (!here)
+		make_env(argc, argv, &env);
+	else
+		make_here_env(argc, argv, &env);
+	pipex(&env, here);
 	free_cmds(*env.cmds);
 	return (0);
 }

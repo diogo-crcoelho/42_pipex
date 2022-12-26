@@ -6,7 +6,7 @@
 #    By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:44:34 by dcarvalh          #+#    #+#              #
-#    Updated: 2022/12/26 16:11:15 by dcarvalh         ###   ########.fr        #
+#    Updated: 2022/12/26 16:27:32 by dcarvalh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ B_SRCS =	pipex.c \
 		 	cmds.c \
 		 	ft_split.c \
 			free.c \
-			get_next_line.c
+			get_next_line.c \
+			heredoc.c
 
 OBJS = $(SRCS:.c=.o)
 B_OBJS = $(B_SRCS:.c=.o)

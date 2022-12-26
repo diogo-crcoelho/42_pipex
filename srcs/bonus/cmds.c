@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:34:46 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/26 16:16:36 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:35:45 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,15 @@ static t_cmd	*create_cmd(char *command, char **envp)
 	return (cmd);
 }
 
-t_cmd	**parse_cmds(t_cmd **head, char **argv, char **envp)
+t_cmd	**parse_cmds(t_cmd **head, char **argv, char **envp, int idx)
 {
 	t_cmd	*tmp;
 	t_cmd	*end;
-	int		i;
 
-	i = 2;
 	end = NULL;
-	while (argv[i + 1])
+	while (argv[idx + 1])
 	{
-		tmp = create_cmd(argv[i++], envp);
+		tmp = create_cmd(argv[idx++], envp);
 		if (!(*head))
 			*head = tmp;
 		if (end)
