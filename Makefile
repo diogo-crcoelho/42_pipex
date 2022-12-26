@@ -6,7 +6,7 @@
 #    By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 20:44:34 by dcarvalh          #+#    #+#              #
-#    Updated: 2022/12/26 16:27:32 by dcarvalh         ###   ########.fr        #
+#    Updated: 2022/12/26 19:46:44 by dcarvalh         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,8 @@ re: fclean all
 sanitize: $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME) -fsanitize=address -g
 
-
+b_sanitize : $(B_OBJS)
+	@$(CC) $(B_OBJS) -o $(NAME) -fsanitize=address -g
 norm_M:
 	@$(echo) "$(C_RED)$(BG_YELLOW)[Norminette]$(C_RESET)"
 	@$(shell (norminette $(SRCS) incs/$(NAME).h > norm.txt))
