@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 16:27:20 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/26 19:08:43 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/26 19:39:59 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	make_here_env(int argc, char **argv, t_envs *env)
 	char	*str;
 
 	env->outfile = argv[argc - 1];
-	env->files[1] = open(env->outfile, O_RDWR | O_CREAT, 0644);
+	env->files[1] = open(env->outfile, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (env->files[1] < 0)
 		err_handle(env->outfile, 1);
 	cmds = *env->cmds;
@@ -55,4 +55,6 @@ void	make_here_env(int argc, char **argv, t_envs *env)
 			break ;
 		write(cmds->fd[1], str, ft_strlen(str));
 	}
+	cmds->fdopen = dup(cmds->fd[0]);
+	close_pipes(cmds->fd);
 }
