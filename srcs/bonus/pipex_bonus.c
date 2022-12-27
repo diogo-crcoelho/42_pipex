@@ -38,7 +38,7 @@ static void	pipex(t_envs *env, int flag)
 	while (cmds)
 	{
 		if (pipe(cmds->fd) < 0)
-			return ;
+			exit(1) ;
 		prot_dup2(env->files[1], 1);
 		pid = fork();
 		if (pid == -1)

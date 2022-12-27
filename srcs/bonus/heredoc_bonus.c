@@ -49,7 +49,8 @@ void	make_here_env(int argc, char **argv, t_envs *env)
 	if (env->files[1] < 0)
 		err_handle(env->outfile, 1);
 	cmds = *env->cmds;
-	pipe(cmds->fd);
+	if (pipe(cmds->fd) < 0)
+		exit (1);
 	while (1)
 	{
 		write(1, "here_doc> ", 11);
