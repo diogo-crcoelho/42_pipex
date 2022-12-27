@@ -74,9 +74,9 @@ int	main(int argc, char **argv, char **envp)
 	static t_cmd	*cmds;
 	int				here;
 
-	if (argc <= 3)
-		err_handle("", -1);
 	here = !(ft_strcmp(argv[1], "here_doc"));
+	if (argc <= 3 + here)
+		err_handle("", -1);
 	env.envp = envp;
 	env.cmds = parse_cmds(&cmds, argv, envp, 2 + here);
 	if (!here)
