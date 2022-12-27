@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 16:27:20 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/26 19:39:59 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:17:48 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	make_here_env(int argc, char **argv, t_envs *env)
 	pipe(cmds->fd);
 	while (1)
 	{
+		write(1, "here_doc> ", 11);
 		str = get_next_line(1);
 		if (ft_strcmp(str, argv[2]) == 10)
 			break ;

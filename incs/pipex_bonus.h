@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:31:11 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/26 19:07:21 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:19:14 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	free_pp(char **pp, int i);
 t_cmd	**parse_cmds(t_cmd **head, char **argv, char **envp, int idx);
 char	*get_next_line(int fd);
 int		ft_strcmp(char *s1, char *s2);
+void	prot_dup2(int fd1, int fd2);
 void	make_here_env(int argc, char **argv, t_envs *env);
 
 #endif

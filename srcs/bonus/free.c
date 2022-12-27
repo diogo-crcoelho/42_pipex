@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:43:58 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/26 16:16:42 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/27 15:19:02 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,10 @@ void	err_handle(char *str, int code)
 		write(2, ": Command not found\n", 21);
 	}
 	exit(1);
+}
+
+void	prot_dup2(int fd1, int fd2)
+{
+	if (dup2(fd1, fd2) == -1)
+		exit(1);
 }
