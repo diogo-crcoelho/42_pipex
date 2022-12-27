@@ -22,13 +22,13 @@ SRCS =	pipex.c \
 		ft_split.c \
 		free.c
 
-B_SRCS =	pipex.c \
-		 	path.c \
-		 	cmds.c \
-		 	ft_split.c \
-			free.c \
-			get_next_line.c \
-			heredoc.c
+B_SRCS =	pipex_bonus.c \
+		 	path_bonus.c \
+		 	cmds_bonus.c \
+		 	ft_split_bonus.c \
+			free_bonus.c \
+			get_next_line_bonus.c \
+			heredoc_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 B_OBJS = $(B_SRCS:.c=.o)

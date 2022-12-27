@@ -30,6 +30,7 @@ static void	execute_cmd(t_cmd *cmd, char **envp)
 static void	pipex(t_envs *env)
 {
 	t_cmd	*cmds;
+	int		pid;
 
 	cmds = *env->cmds;
 	cmds->fdopen = env->files[0];
@@ -38,7 +39,10 @@ static void	pipex(t_envs *env)
 		if (pipe(cmds->fd) < 0)
 			return ;
 		prot_dup2(env->files[1], 1);
-		if (fork() == 0)
+		pid = fork();
+		if (pid == -1)
+			exit(1);
+		if (pid == 0)
 			execute_cmd(cmds, env->envp);
 		else
 		{

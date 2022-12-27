@@ -66,6 +66,8 @@ static t_cmd	*create_cmd(char *command, char **envp)
 	t_cmd	*cmd;
 
 	cmd = malloc(sizeof(t_cmd));
+	if (!cmd)
+		return (NULL);
 	cmd->args = ft_split(command, ' ');
 	cmd->path = find_path(cmd->args[0], envp);
 	cmd->status = 0;
