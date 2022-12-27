@@ -25,7 +25,7 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }					t_cmd;
 
-typedef struct s_doraemon
+typedef struct s_envs
 {
 	t_cmd			**cmds;
 	int				files[2];
