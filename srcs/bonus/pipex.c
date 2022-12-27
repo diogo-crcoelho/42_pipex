@@ -18,7 +18,8 @@
 
 static void	execute_cmd(t_cmd *cmd, char **envp)
 {
-	dup2(cmd->fdopen, 0);
+	if (dup2(cmd->fdopen, 0) == -1)
+		exit(1);
 	if (cmd->next)
 		dup2(cmd->fd[1], 1);
 	close_pipes(cmd->fd);
@@ -26,7 +27,7 @@ static void	execute_cmd(t_cmd *cmd, char **envp)
 	err_handle(cmd->args[0], 2);
 	exit(1);
 }
-
+	
 static void	pipex(t_envs *env, int flag)
 {
 	t_cmd	*cmds;
