@@ -27,7 +27,7 @@ static void	execute_cmd(t_cmd *cmd, char **envp)
 	err_handle(cmd->args[0], 2);
 	exit(1);
 }
-	
+
 static void	pipex(t_envs *env, int flag)
 {
 	t_cmd	*cmds;
@@ -59,10 +59,7 @@ static void	make_env(int argc, char **argv, t_envs *env)
 	env->outfile = argv[argc - 1];
 	env->files[0] = open(env->infile, O_RDONLY);
 	if (env->files[0] < 0)
-	{
-		env->files[0] = 1;
 		err_handle(env->infile, 0);
-	}
 	env->files[1] = open(env->outfile, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (env->files[1] < 0)
 		err_handle(env->outfile, 1);
