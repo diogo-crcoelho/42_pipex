@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/27 15:16:13 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/29 05:37:10 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	pipex(t_envs *env, int flag)
 	while (cmds)
 	{
 		if (pipe(cmds->fd) < 0)
-			exit(1) ;
+			exit(1);
 		prot_dup2(env->files[1], 1);
 		pid = fork();
 		if (pid == -1)
