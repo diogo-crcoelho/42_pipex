@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/29 05:37:05 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:51:45 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,18 @@
 
 static void	execute_cmd(t_cmd *cmd, char **envp)
 {
+	char *path;
+	
+	path = cmd->path;
 	prot_dup2(cmd->fdopen, 0);
 	if (cmd->next)
 		prot_dup2(cmd->fd[1], 1);
 	close_pipes(cmd->fd);
-	execve(cmd->path, cmd->args, envp);
+	if (!cmd->path)
+		path = cmd->args[0];
+	execve(path, cmd->args, envp);
 	err_handle(cmd->args[0], 2);
+	free_cmds(cmd);
 	exit(1);
 }
 
@@ -37,7 +43,7 @@ static void	pipex(t_envs *env)
 	while (cmds)
 	{
 		if (pipe(cmds->fd) < 0)
-			exit(1);
+			exit (1);
 		prot_dup2(env->files[1], 1);
 		pid = fork();
 		if (pid == -1)
