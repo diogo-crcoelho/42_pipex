@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/30 13:14:00 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:10:10 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	execute_cmd(t_envs *env, t_cmd *cmd, char **envp)
 		if (!cmd->path)
 			path = cmd->args[0];
 		execve(path, cmd->args, envp);
+		err_handle(cmd->args[0], 2);
 	}
-	err_handle(cmd->args[0], 2);
 	free_cmds(env->cmds);
 	exit(1);
 }
