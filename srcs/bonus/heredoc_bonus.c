@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 16:27:20 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/30 13:21:39 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:16:33 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,13 @@ static size_t	ft_strlen(const char *str)
 
 void	make_here_env(int argc, char **argv, t_envs *env)
 {
-	t_cmd	*cmds;
 	char	*str;
 
 	env->outfile = argv[argc - 1];
 	env->files[1] = open(env->outfile, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (env->files[1] < 0)
 		err_handle(env->outfile, 1);
-	cmds = *env->cmds;
-	if (pipe(cmds->fd) < 0)
+	if (pipe((*env->cmds)->fd) < 0)
 		exit (1);
 	while (1)
 	{
@@ -62,9 +60,9 @@ void	make_here_env(int argc, char **argv, t_envs *env)
 			free(str);
 			break ;
 		}
-		write(cmds->fd[1], str, ft_strlen(str));
+		write((*env->cmds)->fd[1], str, ft_strlen(str));
 		free (str);
 	}
-	cmds->fdopen = dup(cmds->fd[0]);
-	close_pipes(cmds->fd);
+	(*env->cmds)->fdopen = dup((*env->cmds)->fd[0]);
+	close_pipes((*env->cmds)->fd);
 }

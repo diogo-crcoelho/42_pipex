@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 19:09:06 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/22 16:40:49 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 16:24:29 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static int	word_count(char *str, int sep)
 
 	count = 0;
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
-		while (str[i] != '\0' && str[i] == sep)
+		while (str[i] && str[i] == sep)
 			++i;
-		if (str[i] != '\0')
+		if (str[i])
 			++count;
-		while (str[i] != '\0' && str[i] != sep)
+		while (str[i] && str[i] != sep)
 			++i;
 	}
 	return (count);
@@ -69,11 +69,11 @@ char	**ft_split(char *str, int sep)
 	j = 0;
 	while (j < size)
 	{
-		while (str[i] != '\0' && str[i] == sep)
+		while (str[i] && str[i] == sep)
 			++i;
-		if (str[i] != '\0')
+		if (str[i])
 			strings[j++] = ft_word(&str[i], sep);
-		while (str[i] != '\0' && str[i] != sep)
+		while (str[i] && str[i] != sep)
 			++i;
 	}
 	return (strings);
