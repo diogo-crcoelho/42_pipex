@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 17:34:46 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/23 19:45:59 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:44:40 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	*join_cmd(char *path, char *cmd)
 	while (path[++i])
 		++size;
 	i = -1;
-	while (cmd[++i] && cmd[i] != ' ')
+	while (cmd && cmd[++i] && cmd[i] != ' ')
 		++size;
 	joined = malloc(size + 2);
 	if (!joined)
@@ -34,7 +34,7 @@ static char	*join_cmd(char *path, char *cmd)
 	while (*path)
 		*joined++ = *path++;
 	*joined++ = '/';
-	while (*cmd && *cmd != ' ')
+	while (cmd && *cmd && *cmd != ' ')
 		*joined++ = *cmd++;
 	return (joined - (size + 1));
 }

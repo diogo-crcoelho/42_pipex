@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:43:58 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/30 17:01:10 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:43:43 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,15 @@ void	err_handle(char *str, int code)
 		perror(str);
 	else if (code == 2)
 	{
-		while (*str)
-			write(2, str++, 1);
-		write(2, ": Command not found\n", 21);
-		return ;
+		if (!str)
+			perror("");
+		else
+		{
+			while (str && *str)
+				write(2, str++, 1);
+			write(2, ": Command not found\n", 21);
+			return ;
+		}
 	}
 	exit(1);
 }

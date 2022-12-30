@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:43:58 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/30 17:02:04 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:41:40 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,23 @@ void	err_handle(char *str, int code)
 {
 	if (code == -1)
 		write(2, "\tInvalid number of parameters", 30);
-	else if (code == 0)
+	else if (code == 0 || code == 1)
 	{
 		perror(str);
-		return ;
+		if (code == 0)
+			return ;
 	}
-	else if (code == 1)
-		perror(str);
 	else if (code == 2)
 	{
-		while (*str)
-			write(2, str++, 1);
-		write(2, ": Command not found\n", 21);
-		return ;
+		if (!str)
+			perror("");
+		else
+		{
+			while (str && *str)
+				write(2, str++, 1);
+			write(2, ": Command not found\n", 21);
+			return ;
+		}
 	}
 	exit(1);
 }
