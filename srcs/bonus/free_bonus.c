@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:43:58 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/30 13:09:35 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:01:10 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ void	close_pipes(int fds[2])
 
 void	free_cmds(t_cmd **head)
 {
-	t_cmd	*temp;
+	t_cmd	*tmp;
 
 	if (!*head)
 		return ;
 	while (*head)
 	{
-		temp = *head;
-		free_pp(temp->args, 0);
-		if (temp->path)
-			free(temp->path);
-		*head = temp->next;
-		if (temp)
-			free(temp);
+		tmp = *head;
+		free_pp(tmp->args, 0);
+		if (tmp->path)
+			free(tmp->path);
+		*head = tmp->next;
+		if (tmp)
+			free(tmp);
 	}
 }
 
