@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/29 11:51:45 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:10:50 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,22 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-static void	execute_cmd(t_cmd *cmd, char **envp)
+static void	execute_cmd(t_envs *env, t_cmd *cmd, char **envp)
 {
-	char *path;
-	
+	char	*path;
+
 	path = cmd->path;
-	prot_dup2(cmd->fdopen, 0);
-	if (cmd->next)
-		prot_dup2(cmd->fd[1], 1);
-	close_pipes(cmd->fd);
-	if (!cmd->path)
-		path = cmd->args[0];
-	execve(path, cmd->args, envp);
+	if (dup2(cmd->fdopen, 0) != -1)
+	{
+		if (cmd->next)
+			prot_dup2(cmd->fd[1], 1);
+		close_pipes(cmd->fd);
+		if (!cmd->path)
+			path = cmd->args[0];
+		execve(path, cmd->args, envp);
+	}
 	err_handle(cmd->args[0], 2);
-	free_cmds(cmd);
+	free_cmds(env->cmds);
 	exit(1);
 }
 
@@ -49,7 +51,7 @@ static void	pipex(t_envs *env)
 		if (pid == -1)
 			exit(1);
 		if (pid == 0)
-			execute_cmd(cmds, env->envp);
+			execute_cmd(env, cmds, env->envp);
 		else
 		{
 			waitpid(-1, NULL, 0);
@@ -84,6 +86,6 @@ int	main(int argc, char **argv, char **envp)
 	make_env(argc, argv, &env);
 	env.cmds = parse_cmds(&cmds, argv, envp);
 	pipex(&env);
-	free_cmds(*env.cmds);
+	free_cmds(env.cmds);
 	return (0);
 }

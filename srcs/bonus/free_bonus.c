@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:43:58 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/27 15:19:02 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:09:35 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,21 @@ void	close_pipes(int fds[2])
 	close(fds[1]);
 }
 
-void	free_cmds(t_cmd *head)
+void	free_cmds(t_cmd **head)
 {
 	t_cmd	*temp;
 
-	if (!head)
+	if (!*head)
 		return ;
-	while (head)
+	while (*head)
 	{
-		temp = head;
+		temp = *head;
 		free_pp(temp->args, 0);
-		free(temp->path);
-		head = temp->next;
-		free(temp);
+		if (temp->path)
+			free(temp->path);
+		*head = temp->next;
+		if (temp)
+			free(temp);
 	}
 }
 
@@ -61,6 +63,7 @@ void	err_handle(char *str, int code)
 		while (*str)
 			write(2, str++, 1);
 		write(2, ": Command not found\n", 21);
+		return ;
 	}
 	exit(1);
 }

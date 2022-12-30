@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 16:09:03 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/26 16:18:47 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:16:18 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static char	*ft_strjoin(char *str1, char *str2)
 			break ;
 	}
 	ret[i] = 0;
-	free (str1);
+	if (str1)
+		free (str1);
 	return (ret);
 }
 

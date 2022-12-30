@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 22:31:11 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/27 15:19:14 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:12:23 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**ft_split(char *str, int sep);
 int		ft_strcmp(char *s1, char *s2);
 void	close_pipes(int fds[2]);
 void	err_handle(char *str, int code);
-void	free_cmds(t_cmd *head);
+void	free_cmds(t_cmd **head);
 void	free_pp(char **pp, int i);
 void	make_here_env(int argc, char **argv, t_envs *env);
 void	prot_dup2(int fd1, int fd2);

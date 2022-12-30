@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc.c                                          :+:      :+:    :+:   */
+/*   heredoc_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 16:27:20 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/27 15:17:48 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2022/12/30 13:21:39 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,12 @@ void	make_here_env(int argc, char **argv, t_envs *env)
 		if (!str)
 			write(1, "\n", 1);
 		if (ft_strcmp(str, argv[2]) == 10)
+		{
+			free(str);
 			break ;
+		}
 		write(cmds->fd[1], str, ft_strlen(str));
+		free (str);
 	}
 	cmds->fdopen = dup(cmds->fd[0]);
 	close_pipes(cmds->fd);
