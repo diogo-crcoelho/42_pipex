@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2023/01/02 14:23:26 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2023/01/02 18:57:32 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ static void	execute_cmd(t_envs *env, t_cmd *cmd, char **envp)
 	exit(1);
 }
 
-static void	pipex(t_envs *env)
+static void	pipex(int count, t_envs *env)
 {
 	t_cmd	*cmds;
 	int		pid;
+	int		x;
 
 	cmds = *env->cmds;
 	cmds->fdopen = env->files[0];
@@ -87,7 +88,7 @@ int	main(int argc, char **argv, char **envp)
 	env.envp = envp;
 	make_env(argc, argv, &env);
 	env.cmds = parse_cmds(&cmds, argv, envp);
-	pipex(&env);
+	pipex(argc - 3, &env);
 	free_cmds(env.cmds);
 	return (0);
 }
