@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:43:58 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/30 19:41:40 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2023/01/02 14:20:49 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	err_handle(char *str, int code)
 	else if (code == 0 || code == 1)
 	{
 		perror(str);
-		if (code == 0)
-			return ;
+		return ;
 	}
 	else if (code == 2)
 	{

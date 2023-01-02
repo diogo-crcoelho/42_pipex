@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 14:43:58 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/30 19:43:43 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2023/01/02 14:29:11 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,11 @@ void	err_handle(char *str, int code)
 {
 	if (code == -1)
 		write(2, "\tInvalid number of parameters", 30);
-	else if (code == 0)
+	else if (code == 0 || code == 1)
 	{
 		perror(str);
 		return ;
 	}
-	else if (code == 1)
-		perror(str);
 	else if (code == 2)
 	{
 		if (!str)

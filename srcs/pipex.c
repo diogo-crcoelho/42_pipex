@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2022/12/30 19:41:56 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2023/01/02 14:23:26 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 static void	execute_cmd(t_envs *env, t_cmd *cmd, char **envp)
 {
@@ -25,6 +26,8 @@ static void	execute_cmd(t_envs *env, t_cmd *cmd, char **envp)
 	{
 		if (cmd->next)
 			prot_dup2(cmd->fd[1], 1);
+		else
+			prot_dup2(env->files[1], 1);
 		close_pipes(cmd->fd);
 		if (!cmd->path)
 			path = cmd->args[0];
@@ -46,7 +49,6 @@ static void	pipex(t_envs *env)
 	{
 		if (pipe(cmds->fd) < 0)
 			exit (1);
-		prot_dup2(env->files[1], 1);
 		pid = fork();
 		if (pid == -1)
 			exit(1);
