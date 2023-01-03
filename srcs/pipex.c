@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2023/01/02 18:57:32 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:10:30 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ static void	execute_cmd(t_envs *env, t_cmd *cmd, char **envp)
 	exit(1);
 }
 
-static void	pipex(int count, t_envs *env)
+static void	pipex(t_envs *env)
 {
 	t_cmd	*cmds;
 	int		pid;
-	int		x;
 
 	cmds = *env->cmds;
 	cmds->fdopen = env->files[0];
@@ -57,7 +56,6 @@ static void	pipex(int count, t_envs *env)
 			execute_cmd(env, cmds, env->envp);
 		else
 		{
-			waitpid(-1, NULL, 0);
 			if (cmds->next)
 				cmds->next->fdopen = dup(cmds->fd[0]);
 			close_pipes(cmds->fd);
@@ -82,13 +80,17 @@ int	main(int argc, char **argv, char **envp)
 {
 	static t_envs	env;
 	static t_cmd	*cmds;
+	int				i;
 
 	if (argc != 5)
 		err_handle("", -1);
 	env.envp = envp;
 	make_env(argc, argv, &env);
 	env.cmds = parse_cmds(&cmds, argv, envp);
-	pipex(argc - 3, &env);
+	pipex(&env);
+	i = -1;
+	while (++i < argc - 3)
+		waitpid(-1, NULL, 0);
 	free_cmds(env.cmds);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dcarvalh <dcarvalh@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 15:38:13 by dcarvalh          #+#    #+#             */
-/*   Updated: 2023/01/02 14:29:51 by dcarvalh         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:09:54 by dcarvalh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	pipex(t_envs *env, int flag)
 			execute_cmd(env, cmds, env->envp);
 		else
 		{
-			waitpid(-1, NULL, 0);
 			if (cmds->next)
 				cmds->next->fdopen = dup(cmds->fd[0]);
 			close_pipes(cmds->fd);
@@ -82,6 +81,7 @@ int	main(int argc, char **argv, char **envp)
 	static t_envs	env;
 	static t_cmd	*cmds;
 	int				here;
+	int				i;
 
 	here = !(ft_strcmp(argv[1], "here_doc"));
 	if (argc <= 3 + here)
@@ -93,6 +93,9 @@ int	main(int argc, char **argv, char **envp)
 	else
 		make_here_env(argc, argv, &env);
 	pipex(&env, here);
+	i = -1;
+	while (++i < argc - (3 + here))
+		waitpid(-1, NULL, 0);
 	free_cmds(env.cmds);
 	return (0);
 }
